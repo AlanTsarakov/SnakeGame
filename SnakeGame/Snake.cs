@@ -10,9 +10,13 @@ namespace SnakeGame
 {
     public class Snake : PictureBox
     {
-        private SnakeDirection snakeDirection = SnakeDirection.Up;
-        int SideSize;
-        int x, y;
+        protected SnakeDirection snakeDirection = SnakeDirection.Right;
+        protected int SideSize;
+
+        protected int x, y;
+        protected List<Point> segments = new List<Point>();
+ 
+        Form form;
         public Snake(Form form, int sideSize, int x, int y) 
         {
             this.BackgroundImage = System.Drawing.Image.FromFile("Square.png");
@@ -20,13 +24,12 @@ namespace SnakeGame
             SideSize = sideSize;
             this.Width = SideSize;
             this.Height = SideSize;
+            this.form = form;
             form.Controls.Add(this);
             this.x = x;
             this.y = y;
             this.Location = new Point(x, y);
-
-
-           
+            
         }
         public enum SnakeDirection
         {
@@ -35,7 +38,7 @@ namespace SnakeGame
             Up,
             Down
         }
-        private SnakeDirection GetSnakeDirection()
+        public SnakeDirection GetSnakeDirection()
         {
             return snakeDirection;
         }
@@ -43,26 +46,7 @@ namespace SnakeGame
         {
             snakeDirection = direction;
         }
-
-        public void MoveSnake()
-        {
-           if (snakeDirection == SnakeDirection.Down)
-            {
-                y += SideSize;
-            }
-           else if (snakeDirection == SnakeDirection.Up)
-            {
-                y -= SideSize;
-            }
-           else if (snakeDirection == SnakeDirection.Right)
-            {
-                x += SideSize;
-            }
-           else if (snakeDirection == SnakeDirection.Left)
-            {
-                x -= SideSize;
-            }
-            this.Location = new Point(x, y);
-        }
+     
+        
     }
 }

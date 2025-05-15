@@ -8,26 +8,45 @@ using System.Windows.Forms;
 
 namespace SnakeGame
 {
-    public class Snake : PictureBox
+    class Snake : Sprite
     {
-        private SnakeDirection snakeDirection = SnakeDirection.Up;
-        int SideSize;
-        int x, y;
-        public Snake(Form form, int sideSize, int x, int y) 
+
+        int SnakeLength = 10;
+        Sprite head;
+        List<Sprite> snakes = new List<Sprite>();
+        protected SnakeDirection snakeDirection = SnakeDirection.Right;
+        public Snake(Form form, int SnakeLength) : base(form, sideSize:10, x:10, y:10)
         {
-            this.BackgroundImage = System.Drawing.Image.FromFile("Square.png");
-            this.BackgroundImageLayout = ImageLayout.Stretch;
-            SideSize = sideSize;
-            this.Width = SideSize;
-            this.Height = SideSize;
-            form.Controls.Add(this);
-            this.x = x;
-            this.y = y;
-            this.Location = new Point(x, y);
-
-
-           
+            this.SnakeLength = SnakeLength+1;
+            head = new Sprite(form, 10, 10, 10, true);
+            snakes.Add(head);
+            segments.Add(new Point(10, 10));
+            for (int i = 0; i < SnakeLength; i++)
+            {
+                snakes.Add(new Sprite(form, 10, 10*(i+2), 10, true));
+                segments.Add(new Point(10*i, 10));
+            }
+            
         }
+
+        public bool CheckFoodCollision(Food food)
+        {
+            
+            foreach (var item in snakes)
+            {
+                if (item.Location == food.Location)
+                    return true;
+            }
+            return false;
+        }
+
+        public void Grow()
+        {
+            snakes.Add(new Sprite(form, 10, -10, -10, true));
+            SnakeLength++;
+
+        }
+        
         public enum SnakeDirection
         {
             Left,
@@ -35,7 +54,7 @@ namespace SnakeGame
             Up,
             Down
         }
-        private SnakeDirection GetSnakeDirection()
+        public SnakeDirection GetSnakeDirection()
         {
             return snakeDirection;
         }
@@ -46,23 +65,32 @@ namespace SnakeGame
 
         public void MoveSnake()
         {
-           if (snakeDirection == SnakeDirection.Down)
+            
+            if (snakeDirection == SnakeDirection.Down)
             {
                 y += SideSize;
             }
-           else if (snakeDirection == SnakeDirection.Up)
+            else if (snakeDirection == SnakeDirection.Up)
             {
                 y -= SideSize;
             }
-           else if (snakeDirection == SnakeDirection.Right)
+            else if (snakeDirection == SnakeDirection.Right)
             {
                 x += SideSize;
             }
-           else if (snakeDirection == SnakeDirection.Left)
+            else if (snakeDirection == SnakeDirection.Left)
             {
                 x -= SideSize;
             }
             this.Location = new Point(x, y);
+            segments.Add(Location);
+
+            for (int i = 0; i < SnakeLength; i++)
+            {
+                snakes[snakes.Count - i -1 ].Location = segments[segments.Count - i -1];
+            }
+
+
         }
     }
 }

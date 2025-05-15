@@ -15,11 +15,12 @@ namespace SnakeGame
         Sprite head;
         List<Sprite> snakes = new List<Sprite>();
         protected SnakeDirection snakeDirection = SnakeDirection.Right;
-        public Snake(Form form, int SnakeLength) : base(form, sideSize:10, x:10, y:10, draw: true)
+        public Snake(Form form, int SnakeLength) : base(form, sideSize:10, x:10, y:10)
         {
-            this.SnakeLength = SnakeLength-1;
+            this.SnakeLength = SnakeLength+1;
             head = new Sprite(form, 10, 10, 10, true);
             snakes.Add(head);
+            segments.Add(new Point(10, 10));
             for (int i = 0; i < SnakeLength; i++)
             {
                 snakes.Add(new Sprite(form, 10, 10*(i+2), 10, true));
@@ -41,7 +42,7 @@ namespace SnakeGame
 
         public void Grow()
         {
-            snakes.Add(new Sprite(form, 10, head.Location.X+10, head.Location.Y+10, true));
+            snakes.Add(new Sprite(form, 10, -10, -10, true));
             SnakeLength++;
 
         }

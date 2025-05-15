@@ -12,8 +12,8 @@ namespace SnakeGame
 {
     public partial class FormMain : Form
     {
+        Sprite sprite;
         Snake snake;
-        GameController game;
 
         public FormMain()
         {
@@ -23,8 +23,9 @@ namespace SnakeGame
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            snake = new Snake(this, 10, 80, 20);
-            game = new GameController(this, snake);
+            sprite = new Sprite(this, 10, 80, 20);
+            snake = new Snake(this, snake, 10);
+            Sprite sprite1 = new Sprite(this, 100, 100, 100);
             Timer timer = new Timer();
             timer.Interval = 100;
             timer.Tick += Timer_Tick;
@@ -38,35 +39,36 @@ namespace SnakeGame
         private void Timer_Tick(object sender, EventArgs e)
         {
 
-            game.MoveSnake();
+            snake.MoveSnake();
             
         }
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up && snake.GetSnakeDirection() != Snake.SnakeDirection.Down)
             {
                 snake.SetSnakeDirection(Snake.SnakeDirection.Up);
+                snake.MoveSnake();
 
 
             }
-            else if (e.KeyCode == Keys.Down)
+            else if (e.KeyCode == Keys.Down && snake.GetSnakeDirection() != Snake.SnakeDirection.Up)
             {
                 snake.SetSnakeDirection(Snake.SnakeDirection.Down);
- 
-           
+                snake.MoveSnake();
+
 
             }
-            else if (e.KeyCode == Keys.Right)
+            else if (e.KeyCode == Keys.Right && snake.GetSnakeDirection() != Snake.SnakeDirection.Left)
             {
                 snake.SetSnakeDirection(Snake.SnakeDirection.Right);
-          
+                snake.MoveSnake();
 
             }
-            else if (e.KeyCode == Keys.Left)
+            else if (e.KeyCode == Keys.Left && snake.GetSnakeDirection() != Snake.SnakeDirection.Right)
             {
                 snake.SetSnakeDirection(Snake.SnakeDirection.Left);
-      
+                snake.MoveSnake();
             }
         }
 

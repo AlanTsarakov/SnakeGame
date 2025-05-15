@@ -8,29 +8,25 @@ using System.Windows.Forms;
 
 namespace SnakeGame
 {
-    public class Snake : PictureBox
+    class Snake : Sprite
     {
-        protected SnakeDirection snakeDirection = SnakeDirection.Right;
-        protected int SideSize;
 
-        protected int x, y;
-        protected List<Point> segments = new List<Point>();
- 
-        Form form;
-        public Snake(Form form, int sideSize, int x, int y) 
+        int SnakeLength = 10;
+        Sprite head;
+        List<Sprite> snakes = new List<Sprite>();
+        protected SnakeDirection snakeDirection = SnakeDirection.Right;
+        public Snake(Form form, Sprite sprite, int SnakeLength) : base(form, sideSize:10, x:10, y:10, draw: true)
         {
-            this.BackgroundImage = System.Drawing.Image.FromFile("Square.png");
-            this.BackgroundImageLayout = ImageLayout.Stretch;
-            SideSize = sideSize;
-            this.Width = SideSize;
-            this.Height = SideSize;
-            this.form = form;
-            form.Controls.Add(this);
-            this.x = x;
-            this.y = y;
-            this.Location = new Point(x, y);
+            this.SnakeLength = SnakeLength;
+            for (int i = 0; i < SnakeLength; i++)
+            {
+                snakes.Add(new Sprite(form, 10, 10*i, 10, true));
+                head = sprite;
+                segments.Add(new Point(10*i, 10));
+            }
             
         }
+        
         public enum SnakeDirection
         {
             Left,
@@ -46,7 +42,35 @@ namespace SnakeGame
         {
             snakeDirection = direction;
         }
-     
-        
+
+        public void MoveSnake()
+        {
+            
+            if (snakeDirection == SnakeDirection.Down)
+            {
+                y += SideSize;
+            }
+            else if (snakeDirection == SnakeDirection.Up)
+            {
+                y -= SideSize;
+            }
+            else if (snakeDirection == SnakeDirection.Right)
+            {
+                x += SideSize;
+            }
+            else if (snakeDirection == SnakeDirection.Left)
+            {
+                x -= SideSize;
+            }
+            this.Location = new Point(x, y);
+            segments.Add(Location);
+
+            for (int i = 0; i < SnakeLength; i++)
+            {
+                snakes[snakes.Count - i -1 ].Location = segments[segments.Count - i -1];
+            }
+
+
+        }
     }
 }

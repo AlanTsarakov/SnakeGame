@@ -12,8 +12,10 @@ namespace SnakeGame
 {
     public partial class FormMain : Form
     {
-        Sprite sprite;
         Snake snake;
+        Food food;
+        int points;
+        Label labelPoints = new Label();
 
         public FormMain()
         {
@@ -23,13 +25,18 @@ namespace SnakeGame
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            sprite = new Sprite(this, 10, 80, 20);
-            snake = new Snake(this, snake, 10);
-            Sprite sprite1 = new Sprite(this, 100, 100, 100);
+            snake = new Snake(this, 3);
+            food = new Food(this);
             Timer timer = new Timer();
             timer.Interval = 100;
             timer.Tick += Timer_Tick;
             timer.Start();
+            
+            labelPoints.Text = "Количество очков:";
+            labelPoints.AutoSize = true;
+            labelPoints.Location = new Point(200, 10);
+            Controls.Add(labelPoints);
+
            
 
 
@@ -40,7 +47,13 @@ namespace SnakeGame
         {
 
             snake.MoveSnake();
-            
+            if (snake.CheckFoodCollision(food) == true)
+            {
+                food.MoveFood();
+                snake.Grow();
+                points++;
+                labelPoints.Text = "Количество очков:" + points;
+            }
         }
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)

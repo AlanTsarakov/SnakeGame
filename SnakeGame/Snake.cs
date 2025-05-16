@@ -8,23 +8,19 @@ using System.Windows.Forms;
 
 namespace SnakeGame
 {
-    class Snake : Sprite
+    class Snake
     {
-
-        int SnakeLength = 10;
-        Sprite head;
+        int SideSize;
         List<Sprite> snakes = new List<Sprite>();
-        protected SnakeDirection snakeDirection = SnakeDirection.Right;
-        public Snake(Form form, int SnakeLength) : base(form, sideSize:10, x:10, y:10)
+        Form form;
+        protected SnakeDirection snakeDirection = SnakeDirection.Left;
+        public Snake(Form form, int SnakeLength, int SideSize, int x = 100, int y = 100)
         {
-            this.SnakeLength = SnakeLength+1;
-            head = new Sprite(form, 10, 10, 10, true);
-            snakes.Add(head);
-            segments.Add(new Point(10, 10));
+            this.form = form;
+            this.SideSize = SideSize;
             for (int i = 0; i < SnakeLength; i++)
             {
-                snakes.Add(new Sprite(form, 10, 10*(i+2), 10, true));
-                segments.Add(new Point(10*i, 10));
+                snakes.Add(new Sprite(form, SideSize, x + SideSize*i, y + SideSize, true));
             }
             
         }
@@ -40,13 +36,28 @@ namespace SnakeGame
             return false;
         }
 
+        public bool CheckTailCollision()
+        {
+            HashSet<Point> set = new HashSet<Point>();
+            for (int i = 0; i < snakes.Count; i++)
+            {
+                set.Add(snakes[i].Location);
+            }
+            return !(set.Count == snakes.Count);
+        }
+
         public void Grow()
         {
-            snakes.Add(new Sprite(form, 10, -10, -10, true));
-            SnakeLength++;
+            snakes.Add(new Sprite(form, SideSize, -SideSize, -SideSize, true));
+
 
         }
-        
+
+        internal void Clear()
+        {
+            form.Controls.Clear();
+        }
+
         public enum SnakeDirection
         {
             Left,
@@ -65,31 +76,37 @@ namespace SnakeGame
 
         public void MoveSnake()
         {
-            
+
+
+
+            Point[] positions = new Point[snakes.Count];
+            for (int i = 0; i < snakes.Count-1; i++)
+            {
+                positions[i] = snakes[i].Location;
+            }
+
             if (snakeDirection == SnakeDirection.Down)
             {
-                y += SideSize;
+                snakes[0].Y += SideSize;
             }
             else if (snakeDirection == SnakeDirection.Up)
             {
-                y -= SideSize;
+                snakes[0].Y -= SideSize;
             }
             else if (snakeDirection == SnakeDirection.Right)
             {
-                x += SideSize;
+                snakes[0].X += SideSize;
             }
             else if (snakeDirection == SnakeDirection.Left)
             {
-                x -= SideSize;
+                snakes[0].X -= SideSize;
             }
-            this.Location = new Point(x, y);
-            segments.Add(Location);
 
-            for (int i = 0; i < SnakeLength; i++)
+            for (int i = 1; i < snakes.Count; i++)
             {
-                snakes[snakes.Count - i -1 ].Location = segments[segments.Count - i -1];
+                snakes[i].X = positions[i - 1].X;
+                snakes[i].Y = positions[i - 1].Y;
             }
-
 
         }
     }

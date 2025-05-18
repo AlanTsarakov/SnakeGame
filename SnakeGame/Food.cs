@@ -12,12 +12,12 @@ namespace SnakeGame
         Random rnd = new Random();
         public Food(Form form) : base(form, sideSize: 20, x: 20, y: 20, true)
         {
-            this.Location = new System.Drawing.Point(rnd.Next(0, 20)*SideSize, rnd.Next(0, 20)*SideSize);
+            this.Location = new System.Drawing.Point(rnd.Next(1, 19)*SideSize, rnd.Next(1, 19)*SideSize);
         }
 
         public void MoveFood()
         {
-            this.Location = new System.Drawing.Point(rnd.Next(0, 20) * SideSize, rnd.Next(0, 20) * SideSize);
+            this.Location = new System.Drawing.Point(rnd.Next(1, 19) * SideSize, rnd.Next(1, 19) * SideSize);
         }
     }
 }

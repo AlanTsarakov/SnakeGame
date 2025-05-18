@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+
 
 namespace SnakeGame
 {
@@ -16,6 +20,7 @@ namespace SnakeGame
         Food food;
         int points;
         Label labelPoints = new Label();
+        
 
         Timer timer = new Timer();
         public GameController(Form form)
@@ -28,7 +33,14 @@ namespace SnakeGame
             snake = new Snake(form, 3, 20);
             food = new Food(form);
 
-            
+            playSimpleSound();
+
+            //Button buttonTimer = new Button();
+            //buttonTimer.Click += ButtonTimer_Click;
+            //buttonTimer.Location = new Point(405, 80);
+            //form.KeyPreview = true;
+            //buttonTimer.TabStop = false;
+            //form.Controls.Add(buttonTimer);
 
             labelPoints.Text = "Количество очков:";
             labelPoints.AutoSize = true;
@@ -39,7 +51,19 @@ namespace SnakeGame
 
             timer.Interval = 250;
             timer.Tick += Timer_Tick;
+
   
+        }
+
+        private void ButtonTimer_Click(object sender, EventArgs e)
+        {
+            timer.Stop();
+        }
+
+        private void playSimpleSound()
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"music.wav");
+            simpleSound.Play();
         }
 
         private void FormMain_Paint(object sender, PaintEventArgs e)

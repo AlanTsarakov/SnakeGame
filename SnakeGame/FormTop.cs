@@ -25,15 +25,19 @@ namespace SnakeGame
             InitializeComponent();
             SaveRecordToTxt(player);
             LoadRecord();
+            this.Font = new Font("Impact", 14);
+            
             dataGridViewTop.ColumnCount = 2;
             dataGridViewTop.RowCount = players.Count;
+            
             for (int i = 0; i < players.Count; i++)
             {
                 string[] str = players[i].Split('/');
                 string name = str[0];
                 string scores = str[1];
                 dataGridViewTop[0, i].Value = name;
-                dataGridViewTop[1, i].Value = scores;
+                dataGridViewTop[1, i].Value = Convert.ToInt32(scores);
+                dataGridViewTop.Sort(dataGridViewTop.Columns[1], ListSortDirection.Descending);
             }
         }
 

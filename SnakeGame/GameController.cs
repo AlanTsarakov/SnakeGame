@@ -42,7 +42,7 @@ namespace SnakeGame
             //buttonTimer.TabStop = false;
             //form.Controls.Add(buttonTimer);
 
-            labelPoints.Text = "Количество очков:";
+            labelPoints.Text = "Количество очков: ";
             labelPoints.AutoSize = true;
             labelPoints.Location = new Point(405, 10);
             labelPoints.ForeColor = Color.White;
@@ -107,7 +107,7 @@ namespace SnakeGame
                 food.MoveFood();
                 snake.Grow();
                 points++;
-                labelPoints.Text = "Количество очков:" + points;
+                labelPoints.Text = "Количество очков: " + points;
             }
         }
 
@@ -125,7 +125,7 @@ namespace SnakeGame
 
             points = 0;
 
-            labelPoints.Text = "Количество очков:" + points;
+            labelPoints.Text = "Количество очков: " + points;
             form.Controls.Add(labelPoints);
 
         }

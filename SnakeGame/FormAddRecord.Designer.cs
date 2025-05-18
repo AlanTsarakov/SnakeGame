@@ -37,7 +37,7 @@
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(69, 149);
+            this.textBoxName.Location = new System.Drawing.Point(69, 107);
             this.textBoxName.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(391, 40);
@@ -48,7 +48,8 @@
             // 
             this.buttonSaveRecord.FlatAppearance.BorderSize = 0;
             this.buttonSaveRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSaveRecord.Location = new System.Drawing.Point(69, 212);
+            this.buttonSaveRecord.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSaveRecord.Location = new System.Drawing.Point(69, 174);
             this.buttonSaveRecord.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonSaveRecord.Name = "buttonSaveRecord";
             this.buttonSaveRecord.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -61,10 +62,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 94);
+            this.label1.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(64, 59);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(246, 35);
+            this.label1.Size = new System.Drawing.Size(206, 28);
             this.label1.TabIndex = 2;
             this.label1.Text = "Введите ваше имя:";
             // 
@@ -72,7 +74,8 @@
             // 
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCancel.Location = new System.Drawing.Point(270, 212);
+            this.buttonCancel.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonCancel.Location = new System.Drawing.Point(270, 174);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -87,7 +90,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 34F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGreen;
-            this.ClientSize = new System.Drawing.Size(574, 314);
+            this.ClientSize = new System.Drawing.Size(559, 276);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonSaveRecord);
@@ -97,7 +100,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "FormAddRecord";
-            this.Text = "Сохранить рекорд";
+            this.Text = "Сохранить результат";
             this.Load += new System.EventHandler(this.FormAddRecord_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

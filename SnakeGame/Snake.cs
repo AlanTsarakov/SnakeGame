@@ -14,14 +14,17 @@ namespace SnakeGame
         List<Sprite> snakes = new List<Sprite>();
         Form form;
         protected SnakeDirection snakeDirection = SnakeDirection.Left;
+        public Sprite Head { get; }
         public Snake(Form form, int SnakeLength, int SideSize, int x = 100, int y = 100)
         {
             this.form = form;
             this.SideSize = SideSize;
+            
             for (int i = 0; i < SnakeLength; i++)
             {
                 snakes.Add(new Sprite(form, SideSize, x + SideSize*i, y + SideSize, true));
             }
+            Head = snakes[0];
             
         }
 

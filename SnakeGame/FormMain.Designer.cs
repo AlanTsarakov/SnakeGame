@@ -35,12 +35,12 @@ namespace SnakeGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.ClientSize = new System.Drawing.Size(829, 493);
             this.Name = "FormMain";
             this.Text = "Змейка";
             this.Load += new System.EventHandler(this.FormMain_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormMain_Paint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.ResumeLayout(false);
 
         }

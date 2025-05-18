@@ -10,11 +10,22 @@ namespace SnakeGame
 {
     public class Sprite : PictureBox
     {
-        
+
         protected int SideSize;
 
-        protected int x, y;
-        protected List<Point> segments = new List<Point>();
+        // Автоматически обновляем Location при изменении X или Y
+        private int _x, _y;
+        public int X
+        {
+            get => _x;
+            set { _x = value; this.Location = new Point(_x, _y); }
+        }
+        public int Y
+        {
+            get => _y;
+            set { _y = value; this.Location = new Point(_x, _y); }
+        }
+
 
         protected Form form;
         public Sprite(Form form, int sideSize, int x, int y, bool draw = false) 
@@ -29,8 +40,8 @@ namespace SnakeGame
             {
                 form.Controls.Add(this);
             }
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
             this.Location = new Point(x, y);
             
         }

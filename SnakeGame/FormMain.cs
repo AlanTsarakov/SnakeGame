@@ -37,6 +37,7 @@ namespace SnakeGame
             timer.Tick += Timer_Tick;
             
 
+
             DoubleBuffered = true;
             labelPoints.Text = "Количество очков:";
             labelPoints.AutoSize = true;

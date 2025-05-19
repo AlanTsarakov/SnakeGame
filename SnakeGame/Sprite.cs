@@ -28,9 +28,9 @@ namespace SnakeGame
 
 
         protected Form form;
-        public Sprite(Form form, int sideSize, int x, int y, bool draw = false) 
+        public Sprite(Form form, int sideSize, int x, int y, bool draw = false, string path = "Square.png") 
         {
-            this.BackgroundImage = System.Drawing.Image.FromFile("Square.png");
+            this.BackgroundImage = System.Drawing.Image.FromFile(path);
             this.BackgroundImageLayout = ImageLayout.Stretch;
             SideSize = sideSize;
             this.Width = SideSize;
